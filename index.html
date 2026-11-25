@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Mushukcha — tom ustida sarguzasht</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="wrap">
+    <canvas id="game" width="900" height="420"></canvas>
+
+    <div id="hud">
+      <span>🐟 <b id="fish">0</b></span>
+      <span>Masofa: <b id="dist">0</b> m</span>
+      <span>Rekord: <b id="best">0</b></span>
+      <button id="muteBtn" title="Ovoz">🔊</button>
+    </div>
+
+    <div id="menu" class="overlay">
+      <h1>Mushukcha</h1>
+      <p>Mushukchaga tomlar ustidan uyiga yetib borishga yordam bering!</p>
+      <ul>
+        <li><kbd>Probel</kbd> / <kbd>↑</kbd> yoki ekranga bosish — sakrash (ikki marta ham bo'ladi)</li>
+        <li><kbd>↓</kbd> — egilish (qushlardan qochish uchun)</li>
+        <li><kbd>P</kbd> — pauza</li>
+      </ul>
+      <p class="small">🐟 baliq — +10 ochko &nbsp; 🥛 sut — 5 soniya himoya</p>
+      <button id="startBtn">Boshlash</button>
+    </div>
+
+    <div id="over" class="overlay hidden">
+      <h2>Voy, mushukcha yiqildi! 😿</h2>
+      <p id="result"></p>
+      <button id="againBtn">Yana o'ynash</button>
+    </div>
+  </div>
+
+  <script src="js/sound.js"></script>
+  <script src="js/cat.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
