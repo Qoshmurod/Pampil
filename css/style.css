@@ -68,7 +68,8 @@ canvas {
   padding: 20px;
 }
 
-.overlay.hidden {
+.overlay.hidden,
+#hud.hidden {
   display: none;
 }
 
@@ -110,6 +111,34 @@ kbd {
 
 .overlay button:hover {
   transform: scale(1.06);
+}
+
+#diffs {
+  display: flex;
+  gap: 8px;
+}
+
+#diffs button,
+.overlay button.ghost {
+  margin-top: 0;
+  padding: 6px 18px;
+  font-size: 16px;
+  background: transparent;
+  border: 2px solid #ff8c42;
+  color: #ffb347;
+}
+
+#diffs button.active {
+  background: #ff8c42;
+  color: #fff;
+}
+
+#lives {
+  letter-spacing: 1px;
+}
+
+@media (max-width: 760px) {
+  #hud .wide { display: none; }
 }
 
 @media (max-width: 600px) {

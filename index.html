@@ -10,9 +10,12 @@
   <div id="wrap">
     <canvas id="game" width="900" height="420"></canvas>
 
-    <div id="hud">
+    <div id="hud" class="hidden">
+      <span id="lives"></span>
+      <span>Daraja <b id="level">1</b></span>
       <span>🐟 <b id="fish">0</b></span>
-      <span>Masofa: <b id="dist">0</b> m</span>
+      <span>Ochko: <b id="score">0</b></span>
+      <span class="wide">Masofa: <b id="dist">0</b> m</span>
       <span>Rekord: <b id="best">0</b></span>
       <button id="muteBtn" title="Ovoz">🔊</button>
     </div>
@@ -25,7 +28,15 @@
         <li><kbd>↓</kbd> — egilish (qushlardan qochish uchun)</li>
         <li><kbd>P</kbd> — pauza</li>
       </ul>
-      <p class="small">🐟 baliq — +10 ochko &nbsp; 🥛 sut — 5 soniya himoya</p>
+      <p class="small">🐟 baliq — +10 (ketma-ket tersangiz kombo x5 gacha) &nbsp; 🥛 sut — 5 s himoya<br>
+        🧲 magnit — baliqlarni tortadi &nbsp; ⭐ yulduz — x2 ochko &nbsp; ❤️ yurak — +1 jon</p>
+      <p class="small">Har 400 m da yangi daraja: chuqurliklar, mo'rilar, ko'rshapalaklar, sakraydigan itlar...</p>
+      <div id="diffs">
+        <button data-diff="easy">Oson</button>
+        <button data-diff="normal" class="active">O'rta</button>
+        <button data-diff="hard">Qiyin</button>
+      </div>
+      <p id="diffInfo" class="small"></p>
       <button id="startBtn">Boshlash</button>
     </div>
 
@@ -33,6 +44,7 @@
       <h2>Voy, mushukcha yiqildi! 😿</h2>
       <p id="result"></p>
       <button id="againBtn">Yana o'ynash</button>
+      <button id="menuBtn" class="ghost">Menyu</button>
     </div>
   </div>
 

@@ -29,5 +29,9 @@ const Sound = {
   fish()  { this.beep(900, 0.08, "triangle", 0.1); setTimeout(() => this.beep(1300, 0.1, "triangle", 0.1), 60); },
   milk()  { [500, 700, 900, 1200].forEach((f, i) => setTimeout(() => this.beep(f, 0.12, "sine", 0.1), i * 70)); },
   meow()  { this.beep(700, 0.35, "sawtooth", 0.07, -350); },
-  hit()   { this.beep(150, 0.4, "sawtooth", 0.1, -100); }
+  hit()   { this.beep(150, 0.4, "sawtooth", 0.1, -100); },
+  hurt()  { this.beep(220, 0.25, "square", 0.09, -120); },
+  power() { [600, 900, 600, 900].forEach((f, i) => setTimeout(() => this.beep(f, 0.08, "triangle", 0.09), i * 60)); },
+  heart() { [523, 659, 784].forEach((f, i) => setTimeout(() => this.beep(f, 0.14, "sine", 0.1), i * 90)); },
+  level() { [392, 523, 659, 784, 1046].forEach((f, i) => setTimeout(() => this.beep(f, 0.12, "square", 0.06), i * 80)); }
 };

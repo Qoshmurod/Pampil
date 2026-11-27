@@ -16,6 +16,7 @@ class Cat {
     this.onGround = true;
     this.frame = 0;
     this.shield = 0;      // sut ichsa himoya vaqti
+    this.hurt = 0;        // urilgandan keyingi daxlsizlik vaqti
   }
 
   jump() {
@@ -23,6 +24,7 @@ class Cat {
       this.vy = this.jumps === 0 ? -13 : -11;
       this.jumps++;
       this.onGround = false;
+      this.ducking = false;
       Sound.jump();
     }
   }
@@ -31,20 +33,29 @@ class Cat {
     this.ducking = on && this.onGround;
   }
 
-  update(dt, speed) {
+  // solid - mushuk ostida tom bormi (chuqurlik ustida bo'lsa false)
+  update(dt, speed, solid = true) {
+    const h = this.ducking ? 26 : this.h;
+    const prevBottom = this.y + h;
     this.vy += 0.65 * dt;  // gravitatsiya
     this.y += this.vy * dt;
 
-    const h = this.ducking ? 26 : this.h;
-    if (this.y + h >= this.groundY) {
+    // faqat tepadan tushganda qo'nadi - chuqurlikka tushgan mushuk devorga ilinmaydi
+    if (solid && this.y + h >= this.groundY && prevBottom <= this.groundY + 2) {
       this.y = this.groundY - h;
       this.vy = 0;
       this.jumps = 0;
       this.onGround = true;
+    } else if (this.onGround && this.y + h > this.groundY + 1) {
+      // tom tugadi - yiqilyapti, havoda faqat bitta sakrash qoladi
+      this.onGround = false;
+      this.ducking = false;
+      if (this.jumps === 0) this.jumps = 1;
     }
 
     this.frame += speed * 0.04 * dt;
     if (this.shield > 0) this.shield -= dt / 60;
+    if (this.hurt > 0) this.hurt -= dt / 60;
   }
 
   // to'qnashuv uchun biroz kichikroq quti - o'yinchiga adolatliroq
@@ -60,6 +71,9 @@ class Cat {
 
     ctx.save();
 
+    // urilgandan keyin miltillaydi
+    if (this.hurt > 0 && Math.floor(Date.now() / 90) % 2 === 0) ctx.globalAlpha = 0.3;
+
     // himoya halqasi
     if (this.shield > 0) {
       ctx.globalAlpha = 0.35 + Math.sin(Date.now() / 100) * 0.15;
@@ -67,7 +81,7 @@ class Cat {
       ctx.beginPath();
       ctx.ellipse(x + this.w / 2, y + h / 2, this.w * 0.8, h * 0.95, 0, 0, Math.PI * 2);
       ctx.fill();
-      ctx.globalAlpha = 1;
+      ctx.globalAlpha = this.hurt > 0 && Math.floor(Date.now() / 90) % 2 === 0 ? 0.3 : 1;
     }
 
     const body = "#f4a23c";
